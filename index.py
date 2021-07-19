@@ -1,9 +1,15 @@
 from selection      import Selection, readsel
 from mcpi.minecraft import Minecraft as MC
 from time import sleep
+import json
+
+# handle configuration
+with open("cfg.json", 'r') as f:
+    cfg = json.load(f)
+
 def log(message: str):
-    print(message)
-    mc.postToChat(message)
+    if cfg["verbose"]["console"]: print(message)
+    if cfg["verbose"]["game"]:    mc.postToChat(message)
 
 mc   = MC.create()
 poss = []
