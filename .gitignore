@@ -1,4 +1,3 @@
 *.swp
-.json/
-.tests/
 Session.vim
+__pycache__/
