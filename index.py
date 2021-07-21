@@ -1,4 +1,4 @@
-from selection      import Selection, readsel
+from selection      import Selection, copysel
 from mcpi.minecraft import Minecraft as MC
 from time import sleep
 import json
@@ -23,7 +23,10 @@ while True:
         log(f"{info}: {e.pos.x}, {e.pos.y}, {e.pos.z}")
         if len(poss) == 2:
             log("Copying selection.")
-            sel = readsel(poss[0], poss[1], mc)
+            sel = copysel(poss[0], poss[1], mc)
+            log("Saving selection...")
+            sel.write("sel")
+            log("Saved.")
         elif len(poss) > 2:
             log("Pasting selection.")
             sel.paste(poss[2])
