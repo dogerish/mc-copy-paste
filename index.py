@@ -37,7 +37,7 @@ async def blockhitloop():
                 log("Copying selection.")
                 sel = copysel(poss[0], poss[1], mc)
                 log("Saving selection...")
-                sel.write("selections/sel")
+                sel.write("sels/sel")
                 log("Saved.")
             elif len(poss) > 2:
                 log("Pasting selection.")
