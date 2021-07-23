@@ -6,6 +6,9 @@ from selection import Selection
 with open("cfg.json", 'r') as f:
     cfg = json.load(f)
 
+# puts the filename in a dir automatically
+getfn = lambda fn: fn if fn[0] == '/' else f"{cfg['seldir']}{fn}"
+
 # Minecraft Copy Paste
 class MCP(MC):
     def __init__(self, *args, **kwargs):

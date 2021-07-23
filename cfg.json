@@ -1,4 +1,5 @@
 {
+	"seldir": "sels/",
 	"verbose": {
 		"console": true,
 		"game": true
