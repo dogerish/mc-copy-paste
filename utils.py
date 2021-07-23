@@ -1,9 +1,20 @@
 import json
 from mcpi.minecraft import Minecraft as MC
+from selection import Selection
+
 # handle configuration
 with open("cfg.json", 'r') as f:
     cfg = json.load(f)
 
-def log(mc: MC, message: str):
-    if cfg["verbose"]["console"]: print(message)
-    if cfg["verbose"]["game"]:    mc.postToChat(message)
+# Minecraft Copy Paste
+class MCP(MC):
+    def __init__(self, *args, **kwargs):
+        self.__dict__.update(MC.create(*args, **kwargs).__dict__)
+        self.sel    = Selection([[[]]], self)
+        self.coords = []
+
+    def log(self, message: str) -> None:
+        if cfg["verbose"]["console"]: print(message)
+        if cfg["verbose"]["game"]:    self.postToChat(message)
+
+    def done(self) -> None: self.log("Done.")
