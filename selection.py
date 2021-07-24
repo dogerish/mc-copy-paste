@@ -46,10 +46,8 @@ def readsel(filename: str, *args, **kwargs) -> Selection:
     blocks = [[]]
     with open(filename) as f:
         x, y = 0, 0
-        while True:
-            line = f.readline()
-            if not line: break
-            elif line == '\n':
+        for line in f.readlines():
+            if line == '\n':
                 blocks.append([])
                 x += 1
                 y = 0
