@@ -5,18 +5,20 @@ from aioconsole     import ainput
 # custom
 from utils     import MCP
 from selection import copysel
-import commands
+from commands  import getcmd
 
 mc = MCP()
+
 async def cmdloop() -> None:
     mc.log("Ready")
     while True:
         args = (await ainput()).split(' ')
-        if args[0].startswith("__") or not hasattr(commands, args[0]):
-            print(f"\x1b[31m{args[0]}: command not found.\x1b[0m")
-        else:
-            try: getattr(commands, args[0])(mc, *args[1:])
-            except Exception as e: print(f"\x1b[31m{args[0]}: {e}.\x1b[0m")
+        args[0] = args[0] or "list"
+        try:
+            cmd = getcmd(args[0])
+            if cmd != None: cmd(mc, *args[1:])
+        except Exception as e:
+            print(f"\x1b[31m{args[0]}: {e}.\x1b[0m")
 
 async def blockhitloop() -> None:
     while True:
