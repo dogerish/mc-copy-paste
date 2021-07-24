@@ -13,6 +13,7 @@ getfn = lambda fn: fn if fn[0] == '/' else f"{cfg['seldir']}{fn}"
 class MCP(MC):
     def __init__(self, *args, **kwargs):
         self.__dict__.update(MC.create(*args, **kwargs).__dict__)
+        self.mode   = "normal"
         self.sel    = Selection([[[]]], self)
         self.coords = []
 

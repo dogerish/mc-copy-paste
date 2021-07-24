@@ -46,3 +46,15 @@ def r(mc: MCP, filename: str) -> None:
     mc.log(f"Reading selection from '{filename}'")
     mc.sel = readsel(filename, mc)
     mc.done()
+
+@mkcmd("mode")
+def setmode(mc: MCP, mode: str = None) -> None:
+    "mode <mode> | Sets the mode. Modes include: normal, copy, paste."
+    if mode == None:
+        mc.log(f"Current mode is '{mc.mode}'.")
+        return
+    if not mode in ["normal", "copy", "paste"]:
+        raise ValueError(f"'{mode}' is not a valid mode.")
+    mc.mode = mode
+    mc.coords.clear()
+    mc.log(f"Set mode to {mc.mode} and cleared stored coordinates.")
