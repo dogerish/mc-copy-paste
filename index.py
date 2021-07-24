@@ -3,22 +3,19 @@ import asyncio
 # third party
 from aioconsole     import ainput
 # custom
-from utils     import MCP
+from utils     import cfg, MCP
 from selection import copysel
-from commands  import getcmd
+from commands  import parse
 
 mc = MCP()
 
 async def cmdloop() -> None:
+    try: parse(mc, cfg["autoexec"], fatal=True)
+    except Exception as e:
+        print(f"Error in autoexec; quitting.")
+        exit(1)
     mc.log("Ready")
-    while True:
-        args = (await ainput()).split(' ')
-        args[0] = args[0] or "list"
-        try:
-            cmd = getcmd(args[0])
-            if cmd != None: cmd(mc, *args[1:])
-        except Exception as e:
-            print(f"\x1b[31m{args[0]}: {e}.\x1b[0m")
+    while True: parse(mc, await ainput() or "list")
 
 async def blockhitloop() -> None:
     while True:

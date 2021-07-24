@@ -16,6 +16,7 @@ class MCP(MC):
         self.mode   = "normal"
         self.sel    = Selection([[[]]], self)
         self.coords = []
+        self.source_stack = []
 
     def log(self, message: str) -> None:
         if cfg["verbose"]["console"]: print(message)
