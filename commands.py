@@ -91,3 +91,17 @@ def source(mc: MCP, filename: str, fatal: str = None) -> None:
         except Exception as e:
             pass
     mc.source_stack.pop()
+
+@mkcmd("tp")
+def tp(mc: MCP, x: str, y: str, z: str) -> None:
+    """
+    tp <x> <y> <z> | Teleport to the coordinates.
+    If specified with ~, offset from the current position: current position plus 5: ~+5
+    """
+    pos = [x, y, z]
+    cur_pos = tuple(mc.player.getPos())
+    for i, p in enumerate(pos):
+        if p[0] == '~': pos[i] = cur_pos[i] + float(p[1:] or 0)
+        else: pos[i] = float(p)
+    mc.player.setPos(*pos)
+    mc.log(f"Set position to ({', '.join([str(p) for p in pos])})")
