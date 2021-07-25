@@ -21,7 +21,7 @@ async def blockhitloop() -> None:
     while True:
         for e in mc.events.pollBlockHits():
             mc.coords.append(e.pos)
-            mc.log(f"Selected block at {e.pos.x}, {e.pos.y}, {e.pos.z}")
+            mc.log(f"Selected block at {tuple(e.pos)}")
             if (mc.mode == "normal" or mc.mode == "copy") and len(mc.coords) == 2:
                 mc.log("Copying...")
                 mc.sel = copysel(*mc.coords, mc)

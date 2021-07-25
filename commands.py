@@ -104,4 +104,4 @@ def tp(mc: MCP, x: str, y: str, z: str) -> None:
         if p[0] == '~': pos[i] = cur_pos[i] + float(p[1:] or 0)
         else: pos[i] = float(p)
     mc.player.setPos(*pos)
-    mc.log(f"Set position to ({', '.join([str(p) for p in pos])})")
+    mc.log(f"Set position to {tuple(pos)}")
