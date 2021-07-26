@@ -1,5 +1,5 @@
 # mc-copy-paste
-Copy paste script for Minecraft: Pi Edition.
+Not-so-simple copy paste script for Minecraft: Pi Edition.
 
 ## Installing Dependencies
 You can install all the python dependencies using this command in a terminal:
