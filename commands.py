@@ -37,6 +37,11 @@ def getdoc(cmdname: str) -> str or None:
     cmd = getcmd(cmdname)
     return cmd and f"{cmdname}\t- {cmd.__doc__.strip()}"
 
+@mkcmd("echo")
+def echo(mc: MCP, *args):
+    "Join the arguments with spaces."
+    mc.log(' '.join((str(arg) for arg in args)))
+
 @mkcmd("help")
 def h(mc: MCP, cmdname: str = "help") -> None:
     "help <command> | Get help for a command."
